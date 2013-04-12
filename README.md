@@ -15,17 +15,17 @@ had wrong paths.
 
 And add these settings to nginx:
 
-   location /namespace {
-     proxy_set_header X-Real-IP  $remote_addr;
-     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-     proxy_set_header Host $http_host;
+    location /namespace {
+      proxy_set_header X-Real-IP  $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header Host $http_host;
 
-     if ($request_uri ~ ^/namespace(.*)$) {
-       set $xpathinfo $1;
-       set $xscriptname /namespace;
-     } 
-     proxy_set_header X-PathInfo $xpathinfo;
-     proxy_set_header X-ScriptName $xscriptname;
+      if ($request_uri ~ ^/namespace(.*)$) {
+        set $xpathinfo $1;
+        set $xscriptname /namespace;
+      }
+      proxy_set_header X-PathInfo $xpathinfo;
+      proxy_set_header X-ScriptName $xscriptname;
 
-     proxy_pass http://namespaceapp;
-   }
+      proxy_pass http://namespaceapp;
+    }
